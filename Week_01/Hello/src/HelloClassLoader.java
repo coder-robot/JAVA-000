@@ -21,8 +21,12 @@ public class HelloClassLoader extends ClassLoader {
     public static void main(String[] args) {
 
         // 要加载的类文件
+//        String loadClassFilePath = HelloClassLoader.class
+//                .getProtectionDomain().getCodeSource().getLocation().getPath() + "/Hello.xlass";
         String loadClassFilePath = HelloClassLoader.class
-                .getProtectionDomain().getCodeSource().getLocation().getPath() + "/Hello.xlass";
+                .getResource("/Hello.xlass").getPath();
+
+        System.out.println(loadClassFilePath);
 
         try {
 
