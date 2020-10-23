@@ -71,3 +71,11 @@ java -XX:+PrintFlagsFinal
 -Xmx<size>        设置最大 Java 堆大小
 -Xss<size>        设置 Java 线程堆栈大小
 ```
+
+## 7、常用查看文件命令
+```
+# 查看文件命令
+cat、zcat、xdd、hexdump
+# 转换二进制文件到base64
+base64
+```
