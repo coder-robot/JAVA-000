@@ -1,6 +1,31 @@
 # JVM调优分析笔记
 
-## 一、准备工作
+---
+
+## 目录
+#### <a href="#7">点击查看JVM调优分析总结作业</a>
+#### <a href="#1">一、准备工作</a>
+- <a href="#1.1">1. Mac 安装wrk</a>
+- <a href="#1.2">2. 编译GCLogAnalysis.java(为方便操作移除了包名)</a>
+#### <a href="#2">二、GC 日志解读与分析</a>
+- <a href="#2.1">1. 简单示例</a>
+- <a href="#2.2">2. 模拟一下 OOM</a>
+- <a href="#2.3">3. 分别使用512m、1024m、2048m、4096m堆内存观察 GC 信息的不同</a>
+- <a href="#2.4">4. 串行GC 日志解读与分析</a>
+- <a href="#2.5">5. 并行GC 日志解读与分析</a>
+- <a href="#2.6">6. CMS GC 日志解读与分析</a>
+- <a href="#2.7">7. G1 GC 日志解读与分析</a>
+- <a href="#2.8">8. [扩展练习]通过jdk15观察ZGC和ShenandoahGC的情况</a>
+#### <a href="#3">三、JVM 线程堆栈数据分析</a>
+- <a href="#3.1">1. JVM 线程堆栈数据分析工具</a>
+#### <a href="#4">四、内存分析与相关工具</a>
+#### <a href="#5">五、JVM 问题分析调优经验</a>
+#### <a href="#6">六、GC 疑难情况问题分析</a>
+- <a href="#6.1">1. arthas常见案例分析</a>
+
+---
+
+## <a id="1">一、准备工作</a>
 ```
 # 操作系统
 MacOSX 10.15.7 16CPU 32G
@@ -13,14 +38,14 @@ wrk
 # 测试用spring boot应用 http://localhost:8088/api/hello
 ref_files/gateway-server-0.0.1-SNAPSHOT.jar
 ```
-### 1. Mac 安装wrk
+### <a id="1.1">1. Mac 安装wrk</a>
 ```bash
 1.执行brew install wrk
 如果显式brew update很慢，可以ctrl+C打断更新
 2.输入 wrk
 执行 wrk -t8 -c40 -d60s http://localhost:8088/api/hello
 ```
-### 2. 编译GCLogAnalysis.java(为方便操作移除了包名)
+### <a id="1.2">2. 编译GCLogAnalysis.java(为方便操作移除了包名)</a>
 ```bash
 # 编译
 javac -g GCLogAnalysis.java
@@ -30,7 +55,7 @@ javap -v GCLogAnalysis
 java GCLogAnalysis
 ```
 
-## 二、GC 日志解读与分析
+## <a id="2">二、GC 日志解读与分析</a>
 ```
 # GC Tool
 https://gceasy.io/
@@ -40,7 +65,7 @@ https://perfma.com/product/community
 ```
 ![avatar](ref_images/GC-001.png)
 
-### 1. 简单示例
+### <a id="2.1">1. 简单示例</a>
 ```bash
 # 打印GC详情
 java -XX:+PrintGCDetails GCLogAnalysis
@@ -50,13 +75,13 @@ java -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysi
 less gc.demo.log
 ```
 
-### 2. 模拟一下 OOM
+### <a id="2.2">2. 模拟一下 OOM</a>
 ```bash
 # 模拟一下 OOM
 java -Xmx128m -XX:+PrintGCDetails GCLogAnalysis
 ```
 
-### 3. 分别使用512m、1024m、2048m、4096m堆内存观察 GC 信息的不同
+### <a id="2.3">3. 分别使用512m、1024m、2048m、4096m堆内存观察 GC 信息的不同</a>
 ```bash
 # -Xms512m -Xmx512m
 java -Xms512m -Xmx512m -XX:+PrintGCDetails GCLogAnalysis
@@ -68,13 +93,13 @@ java -Xms2g -Xmx2g -XX:+PrintGCDetails GCLogAnalysis
 java -Xms4g -Xmx4g -XX:+PrintGCDetails GCLogAnalysis
 ```
 
-### 4. 串行GC 日志解读与分析
+### <a id="2.4">4. 串行GC 日志解读与分析</a>
 ```bash
 # 观察 Young GC 与 Full GC
 java -XX:+UseSerialGC -Xms512m -Xmx512m -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
 ```
 
-### 5. 并行GC 日志解读与分析
+### <a id="2.5">5. 并行GC 日志解读与分析</a>
 ```bash
 # 观察 Young GC 与 Full GC
 java -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
@@ -82,7 +107,7 @@ java -XX:+UseParallelGC -Xms512m -Xmx512m -Xloggc:gc.demo.log -XX:+PrintGCDetail
 java -XX:+UseParallelGC -Xmx512m -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
 ```
 
-### 6. CMS GC 日志解读与分析
+### <a id="2.6">6. CMS GC 日志解读与分析</a>
 ```bash
 # 观察 Young GC 与 Full GC
 java -XX:+UseConcMarkSweepGC -Xms512m -Xmx512m -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
@@ -92,7 +117,7 @@ java -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetai
 java -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
 ```
 
-### 7. G1 GC 日志解读与分析
+### <a id="2.7">7. G1 GC 日志解读与分析</a>
 ```bash
 # 观察 Young GC 与 Full GC
 java -XX:+UseG1GC -Xms512m -Xmx512m -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
@@ -102,7 +127,7 @@ java -XX:+UseG1GC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+Pri
 java -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps GCLogAnalysis
 ```
 
-### 8. [扩展练习]通过jdk15观察ZGC和ShenandoahGC的情况
+### <a id="2.8">8. [扩展练习]通过jdk15观察ZGC和ShenandoahGC的情况</a>
 
 ### 总结：
     1. 如何查看/分析不同 GC 配置下的日志信息？
@@ -111,20 +136,20 @@ java -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetai
     2. 各种 GC 有什么特点和使用场景？
     答：
 
-## 三、JVM 线程堆栈数据分析
+## <a id="3">三、JVM 线程堆栈数据分析</a>
 ```
 # Java Thread Dump Analyzer
 https://fastthread.io/
 ```
 
-### 1. JVM 线程堆栈数据分析工具
+### <a id="3.1">1. JVM 线程堆栈数据分析工具</a>
 ```bash
 jconsole
 jvisualvm
 jmc
 ```
 
-## 四、内存分析与相关工具
+## <a id="4">四、内存分析与相关工具</a>
 ```
 # 请思考一个问题：
 一个对象具有100个属性，与100个对象每个具有1个属性，哪个占用的内存空间更大？
@@ -137,15 +162,17 @@ OutOfMemoryError: Java heap space
 • jhat
 ```
 
-## 五、 JVM 问题分析调优经验
+## <a id="5">五、JVM 问题分析调优经验</a>
 ```
 ```
 
-## 六、 GC 疑难情况问题分析
+## <a id="6">六、 GC 疑难情况问题分析</a>
 ```
 # Java Diagnostic Tool
 https://arthas.aliyun.com/zh-cn/
 ```
-### 1. arthas常见案例分析
+### <a id="6.1">1. arthas常见案例分析</a>
 ```bash
 ```
+
+## <a id="7">===JVM调优分析总结===</a>
