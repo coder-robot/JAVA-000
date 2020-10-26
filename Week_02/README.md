@@ -155,6 +155,15 @@ java -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetai
 ![avatar](ref_images/GC-018.png)
 
 ### <a id="2.8">8. [扩展练习]通过jdk15观察ZGC和ShenandoahGC的情况</a>
+```bash
+# 控制台直接输出日志查看 -XX:+PrintGC
+java -XX:+UseZGC -Xms512m -Xmx512m -XX:+PrintGC GCLogAnalysis
+java -XX:+UseZGC -Xms4g -Xmx4g -XX:+PrintGC GCLogAnalysis
+java -XX:+UseZGC -Xms8g -Xmx8g -XX:+PrintGC GCLogAnalysis
+```
+![avatar](ref_images/GC-019.png)
+![avatar](ref_images/GC-020.png)
+![avatar](ref_images/GC-021.png)
 
 ### 总结：
     1. 如何查看/分析不同 GC 配置下的日志信息？
@@ -164,6 +173,7 @@ java -XX:+UseConcMarkSweepGC -Xms4g -Xmx4g -Xloggc:gc.demo.log -XX:+PrintGCDetai
     2. 各种 GC 有什么特点和使用场景？
     答：串行GC尽量不要用,高吞吐考虑并行GC,低延迟考虑CMS GC,如果内存较大考虑G1 GC.
     进一步考虑到低延迟可以考虑新型的ZGC，linux系统上jdk11开始实验支持。
+    oracle jdk不支持-XX:+UseShenandoahGC,openjdk15可以。
 
 ## <a id="3">三、JVM 线程堆栈数据分析</a>
 ```
@@ -193,6 +203,7 @@ OutOfMemoryError: Java heap space
 
 ## <a id="5">五、JVM 问题分析调优经验</a>
 ```
+需要今后多实践...
 ```
 
 ## <a id="6">六、 GC 疑难情况问题分析</a>
@@ -202,6 +213,7 @@ https://arthas.aliyun.com/zh-cn/
 ```
 ### <a id="6.1">1. arthas常见案例分析</a>
 ```bash
+需要今后多实践...
 ```
 
 ## <a id="7">===JVM调优分析总结===</a>
