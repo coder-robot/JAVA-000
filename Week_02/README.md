@@ -4,6 +4,7 @@
 
 ## 目录
 #### <a href="#7">点击查看JVM调优分析总结作业</a>
+代码作业为当前目录的 http-client
 #### <a href="#1">一、准备工作</a>
 - <a href="#1.1">1. Mac 安装wrk</a>
 - <a href="#1.2">2. 编译GCLogAnalysis.java(为方便操作移除了包名)</a>
