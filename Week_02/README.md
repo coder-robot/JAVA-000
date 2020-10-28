@@ -64,6 +64,7 @@ https://gceasy.io/
 https://github.com/chewiebug/GCViewer
 https://perfma.com/product/community
 ```
+![avatar](ref_images/GCeasy-001.png)
 
 ### <a id="2.1">1. 简单示例</a>
 ```bash
@@ -181,6 +182,7 @@ java -XX:+UseZGC -Xms8g -Xmx8g -XX:+PrintGC GCLogAnalysis
 # Java Thread Dump Analyzer
 https://fastthread.io/
 ```
+![avatar](ref_images/Thread-001.png)
 
 ### <a id="3.1">1. JVM 线程堆栈数据分析工具</a>
 ```bash
@@ -193,8 +195,9 @@ jmc
 ```
 # 请思考一个问题：
 一个对象具有100个属性，与100个对象每个具有1个属性，哪个占用的内存空间更大？
+答：100个对象每个具有1个属性的大。 64位对象头占用12字节。
 
-#
+# 堆溢出
 OutOfMemoryError: Java heap space
 
 # 内存 Dump 分析工具
