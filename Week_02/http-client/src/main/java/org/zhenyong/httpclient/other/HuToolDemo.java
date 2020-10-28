@@ -1,4 +1,4 @@
-package org.zhenyong.httpclient;
+package org.zhenyong.httpclient.other;
 
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
