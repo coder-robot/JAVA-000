@@ -1,0 +1,17 @@
+package me.zhenyong.gateway1.filter.pre;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class PreFilterImpl1 implements PreFilter {
+    @Override
+    public String process(String inbound) {
+        System.out.println("------>" + this + "处理了");
+        return inbound;
+    }
+
+    @Override
+    public String toString() {
+        return "PreFilterImpl1{}";
+    }
+}
