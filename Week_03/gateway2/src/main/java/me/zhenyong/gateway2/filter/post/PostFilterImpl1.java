@@ -1,9 +1,9 @@
-package me.zhenyong.gateway1.filter.post;
+package me.zhenyong.gateway2.filter.post;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostFilterImpl2 implements PostFilter {
+public class PostFilterImpl1 implements PostFilter {
 
     @Override
     public String process(String outbound) {
@@ -13,6 +13,6 @@ public class PostFilterImpl2 implements PostFilter {
 
     @Override
     public String toString() {
-        return "PostFilterImpl2{}";
+        return "PostFilterImpl1{}";
     }
 }

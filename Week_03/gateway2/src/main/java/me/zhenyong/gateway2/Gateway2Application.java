@@ -1,7 +1,7 @@
-package me.zhenyong.gateway1;
+package me.zhenyong.gateway2;
 
-import me.zhenyong.gateway1.filter.post.PostFilter;
-import me.zhenyong.gateway1.filter.pre.PreFilter;
+import me.zhenyong.gateway2.filter.post.PostFilter;
+import me.zhenyong.gateway2.filter.pre.PreFilter;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;

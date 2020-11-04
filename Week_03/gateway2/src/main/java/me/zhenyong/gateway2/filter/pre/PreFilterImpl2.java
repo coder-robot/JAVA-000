@@ -1,9 +1,9 @@
-package me.zhenyong.gateway1.filter.pre;
+package me.zhenyong.gateway2.filter.pre;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class PreFilterImpl1 implements PreFilter {
+public class PreFilterImpl2 implements PreFilter {
     @Override
     public String process(String inbound) {
         System.out.println("------>" + this + "处理了");
@@ -12,6 +12,6 @@ public class PreFilterImpl1 implements PreFilter {
 
     @Override
     public String toString() {
-        return "PreFilterImpl1{}";
+        return "PreFilterImpl2{}";
     }
 }

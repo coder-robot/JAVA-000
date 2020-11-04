@@ -1,4 +1,4 @@
-package me.zhenyong.gateway1.filter.pre;
+package me.zhenyong.gateway2.filter.pre;
 
 /**
  * 前置过滤器

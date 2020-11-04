@@ -1,10 +1,10 @@
-package me.zhenyong.gateway1;
+package me.zhenyong.gateway2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Gateway1ApplicationTests {
+class Gateway2ApplicationTests {
 
     @Test
     void contextLoads() {
