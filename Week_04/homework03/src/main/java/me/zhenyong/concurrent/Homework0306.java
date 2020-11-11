@@ -3,7 +3,7 @@ package me.zhenyong.concurrent;
 import java.util.concurrent.*;
 
 /**
- * 方法5
+ * 方法6
  *
  * @author zhenyong
  */
@@ -34,6 +34,5 @@ public class Homework0306 {
 
         // 然后退出main线程
         executor.shutdown();
-        new ThreadPoolExecutor()
     }
 }
