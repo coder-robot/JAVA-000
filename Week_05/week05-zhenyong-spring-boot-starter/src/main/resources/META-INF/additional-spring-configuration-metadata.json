@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "spring.week05.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether enable week05 or not.",
+      "defaultValue": true
+    },
+    {
+      "name": "spring.week05.zhenyong.props",
+      "type": "java.util.Properties",
+      "sourceType": "me.zhenyong.spring.boot.prop.SpringBootPropertiesConfiguration",
+      "description": "Customize week05.zhenyong properties."
+    }
+  ]
+}

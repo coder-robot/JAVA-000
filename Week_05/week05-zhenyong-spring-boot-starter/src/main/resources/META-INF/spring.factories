@@ -1,0 +1,3 @@
+# SpringBootAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+me.zhenyong.spring.boot.SpringBootConfiguration

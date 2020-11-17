@@ -1,0 +1,10 @@
+server:
+  port: 9001
+
+spring:
+  week05:
+    enabled: true
+    zhenyong:
+      props:
+        user-id: 666
+        user-name: zhenyongli
