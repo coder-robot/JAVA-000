@@ -1,2 +1,10 @@
 server:
   port: 6002
+
+# 自定义纯jdbc配置 使用mysql-connector-java 5.1.47
+zhenyong:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/week5_zhenyong?useSSL=false
+    username: root
+    password: 123456

@@ -4,3 +4,7 @@
 ### 3）配置 Hikari 连接池，改进上述操作。提交代码到 Github。
 
 # http://localhost:6002/
+
+# https://commons.apache.org/proper/commons-dbutils/
+
+# PlainJdbcUserDaoImpl#batchInsert -----------------批量插入作业

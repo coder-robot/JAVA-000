@@ -3,7 +3,7 @@ package me.zhenyong.springbootcrud01.crud;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2020/11/18 4:21 下午
  * @since JDK1.8
  */
-@Service
+@Repository
 @Qualifier("jdbcTemplateUserDaoImpl")
 public class JdbcTemplateUserDaoImpl implements UserDao {
 

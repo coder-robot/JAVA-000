@@ -4,3 +4,5 @@
 ### 3）`当前作业 ---> 配置 Hikari 连接池，改进上述操作。提交代码到 Github。`
 
 # http://localhost:6003/
+
+# https://github.com/brettwooldridge/HikariCP

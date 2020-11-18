@@ -1,2 +1,17 @@
 server:
   port: 6003
+
+# 自定义hikari数据库连接池配置
+zhenyong:
+  hikari:
+    datasource:
+      driverClassName: com.mysql.jdbc.Driver
+      jdbcUrl: jdbc:mysql://localhost:3306/week5_zhenyong?useSSL=false
+      username: root
+      password: 123456
+      connectionTimeout: 6000 # 从连接池获取连接最大等待时间
+      idleTimeout: 20000 # 空闲超时时间
+      maxLifeTime: 1800000 # 连接回收, 默认30分钟
+      connectionTestQuery: "select 1" # 如果JDBC4以上则不需要设置
+      minimumIdle: 20 # 最小空闲数
+      maximumPoolSize: 50 # 最大连接数
