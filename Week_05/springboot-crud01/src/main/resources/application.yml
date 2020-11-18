@@ -1,0 +1,28 @@
+server:
+  port: 6001
+
+# 自定义纯jdbc配置 使用mysql-connector-java 5.1.47
+zhenyong:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/week5_zhenyong?useSSL=false
+    username: root
+    password: 123456
+
+## 自定义纯jdbc配置 使用mysql-connector-java 8.0.20 需要指定时区
+#zhenyong:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/house?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: 123456
+
+# spring的jdbcTemplate需要使用以下配置,spring官方整合的jdbc api;
+# 使用mysql-connector-java 5.1.47
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/week5_zhenyong?useSSL=false
+    username: root
+    password: 123456
+
