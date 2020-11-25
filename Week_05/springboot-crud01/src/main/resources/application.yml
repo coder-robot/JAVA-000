@@ -25,4 +25,16 @@ spring:
     url: jdbc:mysql://localhost:3306/week5_zhenyong?useSSL=false
     username: root
     password: 123456
+    # type: com.zaxxer.hikari.HikariDataSource
+#    hikari:
+#      driver-class-name: com.mysql.jdbc.Driver
+#      jdbc-url: jdbc:mysql://localhost:3306/week5_zhenyong?useSSL=false
+#      username: root
+#      password: 123456
+#      connection-timeout: 6000 # 从连接池获取连接最大等待时间
+#      idle-timeout: 20000 # 空闲超时时间
+#      max-lifetime: 1800000 # 连接回收, 默认30分钟
+#      connection-test-query: "select 1" # 如果JDBC4以上则不需要设置
+#      minimum-idle: 20 # 最小空闲数
+#      maximum-pool-size: 50 # 最大连接数
 
